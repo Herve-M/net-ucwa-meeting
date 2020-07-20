@@ -29,6 +29,7 @@ stages:
 - name: pack
 
 install: 
+  - dotnet tool install -g dotnet-format
   - dotnet restore UCWA.Meeting.sln
 
 jobs:
@@ -36,7 +37,9 @@ jobs:
   - stage: build
     script: dotnet build UCWA.Meeting.sln -c Release
   - stage: test
-    script: dotnet test UCWA.Meeting.sln -c Release
+    script: 
+      - dotnet test UCWA.Meeting.sln -c Release
+      - dotnet format --check UCWA.Meeting.sln
   - stage: quality-check
     script:
       - sonar-scanner
