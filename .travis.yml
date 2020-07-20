@@ -40,13 +40,19 @@ jobs:
   include:
   - stage: build
     script: dotnet build UCWA.Meeting.sln -c Release
+  
   - stage: test
-    script: 
-      - dotnet test UCWA.Meeting.sln -c Release
-      - dotnet-format --check UCWA.Meeting.sln
+    name: "Unit Tests"
+    script: dotnet test UCWA.Meeting.sln -c Release
+  
+  - #stage: test
+    name: "Format check"
+    script: dotnet-format --check UCWA.Meeting.sln
+  
   - stage: quality-check
     script:
       - sonar-scanner
+  
   - stage: pack
     script:
     - dotnet pack src\UCWA.Meeting.Abstractions\UCWA.Meeting.Abstractions.csproj -c Release
