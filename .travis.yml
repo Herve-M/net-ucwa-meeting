@@ -50,13 +50,13 @@ jobs:
     script: dotnet-format --check UCWA.Meeting.sln
   
   - stage: quality-check
-    script:
-      - sonar-scanner
+    name: "SonarCube"
+    script: sonar-scanner
   
   - stage: pack
     script:
-    - dotnet pack src\UCWA.Meeting.Abstractions\UCWA.Meeting.Abstractions.csproj -c Release
-    - dotnet pack src\UCWA.Meeting.Client\UCWA.Meeting.Client.csproj --include-symbols -c Release
+    - dotnet pack src/UCWA.Meeting.Abstractions/UCWA.Meeting.Abstractions.csproj -c Release
+    - dotnet pack src/UCWA.Meeting.Client/UCWA.Meeting.Client.csproj --include-symbols -c Release
 
 notifications:
   email:
