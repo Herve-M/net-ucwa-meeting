@@ -23,16 +23,16 @@ branches:
   - develop
 
 stages:
-- name: restore
 - name: build
 - name: test
 - name: quality-check
 - name: pack
 
+install: 
+  - dotnet restore UCWA.Meeting.sln
+
 jobs:
   include:
-  - stage: restore
-    script: dotnet restore UCWA.Meeting.sln
   - stage: build
     script: dotnet build UCWA.Meeting.sln -c Release
   - stage: test
