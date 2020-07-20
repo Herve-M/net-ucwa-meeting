@@ -1,0 +1,22 @@
+<Project>
+  <!-- Package configuration -->
+  <PropertyGroup>
+    <Authors>MATYSIAK Hervé</Authors>
+    <RepositoryUrl>https://github.com/Herve-M/net-ucwa-meeting</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <!-- Language configuration -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+
+  <!-- Build configuration -->
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,33 @@
+# Refer for explanation to following link:
+# https://github.com/Arkweid/lefthook/blob/master/docs/full_guide.md
+
+pre-commit:
+  parallel: true
+  commands:
+    check-spell-md:
+      glob: "*.md"
+      run: npx cspell -- --no-summary {staged_files}
+
+commit-msg:
+  commands:
+    lint-commit-msg:
+      run: npx commitlint --edit
+
+pre-push:
+  commands: 
+    net-format:
+      files: git diff --name-only HEAD @{push}
+      glob: "*.cs"
+      run: dotnet format --check --include {files}
+    net-build: 
+      run: dotnet build ./UCWA.Meeting.sln -v q -c Release
+    net-test: 
+      run: dotnet test ./tests/UCWA.Meeting.Client.Tests/UCWA.Meeting.Client.Tests.csproj --no-build --no-restore -v q -c Release
+
+post-checkout: 
+  parallel: true
+  commands: 
+    net-clean-release: 
+      run: dotnet clean ./UCWA.Meeting.sln -v q -c Release 
+    net-clean-debug: 
+      run: dotnet clean ./UCWA.Meeting.sln -v q -c Debug

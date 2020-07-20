@@ -1,0 +1,15 @@
+<Project>
+  <Import Project="..\Directory.Build.props" />
+  
+  <!-- Common properties -->
+  <PropertyGroup>
+    <ProjectDir>$(MSBuildThisFileDirectory)</ProjectDir>
+    <SourceDir>$(ProjectDir)src\</SourceDir>
+  </PropertyGroup>
+
+  <!-- Set the kind of PDB to Portable -->
+  <!-- <PropertyGroup>
+    <DebugType Condition="'$(DebugType)' == ''">Portable</DebugType>
+  </PropertyGroup> -->
+
+</Project>

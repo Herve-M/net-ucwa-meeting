@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30309.148
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCWA.Meeting.Abstractions", "src\UCWA.Meeting.Abstractions\UCWA.Meeting.Abstractions.csproj", "{80BDD236-6C0A-44E2-956C-EC7F3092291C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UCWA.Meeting.Client", "src\UCWA.Meeting.Client\UCWA.Meeting.Client.csproj", "{0B5AE005-F10B-4027-AF9D-DB943F29E636}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5F195E6B-C7FF-4A06-999B-876A746E197E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8E2AA7F3-C077-4742-85B8-EE5DB158D92D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{46B9D7B9-833F-4E46-855C-2442069BCCD9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CA4C8674-8D28-4CB4-A173-D339B871A3A4}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		commitlint.config.js = commitlint.config.js
+		global.json = global.json
+		lefthook.yml = lefthook.yml
+		UCWA.Meeting.vsext = UCWA.Meeting.vsext
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UCWA.Meeting.Client.Tests", "tests\UCWA.Meeting.Client.Tests\UCWA.Meeting.Client.Tests.csproj", "{7933A4C0-F973-4ECC-A53B-6ED9233E975C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{80BDD236-6C0A-44E2-956C-EC7F3092291C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80BDD236-6C0A-44E2-956C-EC7F3092291C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80BDD236-6C0A-44E2-956C-EC7F3092291C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80BDD236-6C0A-44E2-956C-EC7F3092291C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B5AE005-F10B-4027-AF9D-DB943F29E636}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B5AE005-F10B-4027-AF9D-DB943F29E636}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B5AE005-F10B-4027-AF9D-DB943F29E636}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B5AE005-F10B-4027-AF9D-DB943F29E636}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7933A4C0-F973-4ECC-A53B-6ED9233E975C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7933A4C0-F973-4ECC-A53B-6ED9233E975C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7933A4C0-F973-4ECC-A53B-6ED9233E975C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7933A4C0-F973-4ECC-A53B-6ED9233E975C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80BDD236-6C0A-44E2-956C-EC7F3092291C} = {5F195E6B-C7FF-4A06-999B-876A746E197E}
+		{0B5AE005-F10B-4027-AF9D-DB943F29E636} = {5F195E6B-C7FF-4A06-999B-876A746E197E}
+		{7933A4C0-F973-4ECC-A53B-6ED9233E975C} = {8E2AA7F3-C077-4742-85B8-EE5DB158D92D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3B72238E-A512-4D9F-BABE-D76B79654C6A}
+	EndGlobalSection
+EndGlobal

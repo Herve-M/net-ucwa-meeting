@@ -1,0 +1,10 @@
+<Project>
+  <Import Project="..\Directory.Build.props" />
+  
+  <!-- Common properties -->
+  <PropertyGroup>
+    <ProjectDir>$(MSBuildThisFileDirectory)</ProjectDir>
+    <SourceDir>$(ProjectDir)tests\</SourceDir>
+  </PropertyGroup>
+
+</Project>
