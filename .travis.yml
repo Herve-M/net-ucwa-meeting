@@ -54,9 +54,11 @@ jobs:
     script: sonar-scanner
   
   - stage: pack
-    script:
-    - dotnet pack src/UCWA.Meeting.Abstractions/UCWA.Meeting.Abstractions.csproj -c Release
-    - dotnet pack src/UCWA.Meeting.Client/UCWA.Meeting.Client.csproj --include-symbols -c Release
+    name: "UCWA.Meeting.Abstractions"
+    script: dotnet pack src/UCWA.Meeting.Abstractions/UCWA.Meeting.Abstractions.csproj -c Release
+  - #stage: pack
+    name: "UCWA.Meeting.Client"
+    script: dotnet pack src/UCWA.Meeting.Client/UCWA.Meeting.Client.csproj --include-symbols -c Release
 
 notifications:
   email:
