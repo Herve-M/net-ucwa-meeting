@@ -43,7 +43,7 @@ jobs:
   - stage: test
     script: 
       - dotnet test UCWA.Meeting.sln -c Release
-      - dotnet format --check UCWA.Meeting.sln
+      - dotnet-format --check UCWA.Meeting.sln
   - stage: quality-check
     script:
       - sonar-scanner
