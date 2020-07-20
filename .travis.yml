@@ -1,15 +1,20 @@
 language: csharp
 mono: none
 dotnet: 3.1.302
-
 dist: bionic
-
 git:
   submodules: false
 
 env:
+  matrix:
   - DOTNET_NOLOGO=true
   - DOTNET_CLI_TELEMETRY_OPTOUT=true
+
+addons:
+  sonarcloud:
+    organization: "herve-m"
+    token:
+      secure: G0Mhzlirqju4aDYr9pQ1VIGOe/hkVzAU1aF0CWuQgcUb72UAJAvW8D/eTAM8oJszFPgCem8Bhj1zv6o2HudoAZB5s3vH/H8A3qwVrV3AuhpGjFIZdDXuNauXHDy0ec5kDmjl3VgAFpuHsljY7FJpcvaqDHQWJN6RH0wdZfzDR4ZJntVzXICE/yZZsl78nF/HgWycKKGIVYnDA/PwFvEFulgVx4+rIRbfZOYectob4xGnMtj2FjQEl1cMJ9/leK3d5bzU0RnE01ed1ybjClbO200WCOb1903aJWr4ylKflUAXul82VTpCDHc5/R0MqVqhLpHPHCVba8RsSKiPdhOvcTd0BWvbnZ1/rWiivfhMPQFZwfCWJdtqqrb1yCZruzlXlSPZOTzH7ggnj33KcxrH9fJO3vM8HCHBoLL1lUP5cOTr1qhMqCPMVg/39p9H6S+sB3Uznk2nQjrOYxW5N6Y1dQvetP7oF5L4MsHEt+ulCO0EG/jI6fGMfOZrF4yy+SWNvGlnpRQmjyCKyvh98VgQjQqdubY1Ofegd8KN9ditxRMx33ONuakHVJhpMy4Ig/Uhk06XyFAqYAFueFKSLbPGiWtPhDweD6s6XpDcalJICBUaUGknEvVBfphjHWNwnB6oAUzyAsK0ckPFytIm3/0JFTDV6+8F6jcyZ2zVk/z/Rc4=
 
 branches:
   only:
@@ -17,23 +22,27 @@ branches:
   - develop
 
 stages:
-  - name: restore
-  - name: build
-  - name: test
-  - name: pack
+- name: restore
+- name: build
+- name: test
+- name: quality-check
+- name: pack
 
 jobs:
   include:
-    - stage: restore
-      script: dotnet restore UCWA.Meeting.sln
-    - stage: build 
-      script: dotnet build UCWA.Meeting.sln -c Release
-    - stage: test
-      script: dotnet test UCWA.Meeting.sln -c Release
-    - stage: pack
-      script:
-        - dotnet pack src\UCWA.Meeting.Abstractions\UCWA.Meeting.Abstractions.csproj -c Release
-        - dotnet pack src\UCWA.Meeting.Client\UCWA.Meeting.Client.csproj --include-symbols -c Release
+  - stage: restore
+    script: dotnet restore UCWA.Meeting.sln
+  - stage: build
+    script: dotnet build UCWA.Meeting.sln -c Release
+  - stage: test
+    script: dotnet test UCWA.Meeting.sln -c Release
+  - stage: quality-check
+    script:
+      - sonar-scanner
+  - stage: pack
+    script:
+    - dotnet pack src\UCWA.Meeting.Abstractions\UCWA.Meeting.Abstractions.csproj -c Release
+    - dotnet pack src\UCWA.Meeting.Client\UCWA.Meeting.Client.csproj --include-symbols -c Release
 
 notifications:
   email:
