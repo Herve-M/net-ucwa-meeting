@@ -6,7 +6,7 @@ git:
   submodules: false
 
 env:
-  matrix:
+  global:
   - DOTNET_NOLOGO=true
   - DOTNET_CLI_TELEMETRY_OPTOUT=true
 
