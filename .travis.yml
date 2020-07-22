@@ -1,0 +1,66 @@
+language: csharp
+mono: none
+dotnet: 3.1.302
+dist: bionic
+git:
+  submodules: false
+
+env:
+  global:
+  - DOTNET_NOLOGO=true
+  - DOTNET_CLI_TELEMETRY_OPTOUT=true
+  - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=true
+
+addons:
+  sonarcloud:
+    organization: "herve-m"
+    token:
+      secure: "jcX9Q/ut+qvBkl3FtwLKHYkIqQa5X4XuD6yqxRClK6qHbKIaumioU5XXQz4C4K8LwQMifskBewzCN2NlZR0BacxtJvyFKuOggBZMb96E9JZ7kjG48g4UJMJZnQQq4Qv1fIBunIsLZAYpWBttSztzi6/U0PM+jpAn1XWYRZLoiuV6Mnodsxppn7COog7tvecaBkBhjW3GfhZ30c1FsNf1Se3NKBX5wizkXf4fjJSuTcPAvX6ER0pUkVxCrnWMjjzO66VC7Q0udkvqfva8SmM59ucOOqYOBTcq6jXyuBKyVFmxqDcdSb+Y5KBkp9HTBEa5jSvPaDESaXSBuDnRL5yZZgacy2a56Ki1LzHa0tb6U4fyU7gIzIHaAEO5A459a3kTztrwzwCR6GE5OlJsmNsjBi8etWQVt9irNrl1U8DkJDktpT9yb2b5fjNNimZXqLebCtQ4sAwXKxL/ax7QnbjmZ2/BTvARRZimOq0zmLWOun225nK5zV8PzcESBvJoDn6YTcxAOKctvdLKPyzkWbZFBqEJusx0HX2CX2z/xTp3pLal78gk4U2R4B7QFncDConG/IpxFU9eFE4oO58Bo15aRKJNwVIUyZxVOPJVeIXmtN+gEqWM7rlfssiD4LdFavt8lfs0Sr1D4FQLPV8jNd6iksEChe3iPrJ2weQk+O6i/YI="
+
+branches:
+  only:
+  - master
+  - develop
+
+stages:
+- name: build
+- name: test
+- name: quality-check
+- name: pack
+
+install: 
+  - dotnet tool install -g dotnet-format
+  - dotnet restore UCWA.Meeting.sln
+
+# Thanks https://stackoverflow.com/a/56482504/2361636 @René Sackers
+before_script:
+  - export PATH=$PATH:/home/travis/.dotnet/tools
+
+jobs:
+  include:
+  - stage: build
+    script: dotnet build UCWA.Meeting.sln -c Release
+  
+  - stage: test
+    name: "Unit Tests"
+    script: dotnet test UCWA.Meeting.sln -c Release
+  
+  - #stage: test
+    name: "Format check"
+    script: dotnet-format --check UCWA.Meeting.sln
+  
+  - stage: quality-check
+    name: "SonarCube"
+    script: sonar-scanner
+  
+  - stage: pack
+    name: "UCWA.Meeting.Abstractions"
+    script: dotnet pack src/UCWA.Meeting.Abstractions/UCWA.Meeting.Abstractions.csproj -c Release
+  - #stage: pack
+    name: "UCWA.Meeting.Client"
+    script: dotnet pack src/UCWA.Meeting.Client/UCWA.Meeting.Client.csproj --include-symbols -c Release
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
